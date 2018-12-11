@@ -1,0 +1,36 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "pers.yurwisher.wechatstarter.WeChatConfig",
+      "name": "yq.weChat",
+      "type": "pers.yurwisher.wechatstarter.WeChatConfig"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "pers.yurwisher.wechatstarter.WeChatConfig",
+      "name": "yq.weChat.aes-key",
+      "description": "服务器配置 消息加解密密钥(EncodingAESKey)",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "pers.yurwisher.wechatstarter.WeChatConfig",
+      "name": "yq.weChat.app-id",
+      "description": "公众号appId",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "pers.yurwisher.wechatstarter.WeChatConfig",
+      "name": "yq.weChat.secret",
+      "description": "公众号密钥",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "pers.yurwisher.wechatstarter.WeChatConfig",
+      "name": "yq.weChat.server-token",
+      "description": "服务器配置令牌 token",
+      "type": "java.lang.String"
+    }
+  ]
+}

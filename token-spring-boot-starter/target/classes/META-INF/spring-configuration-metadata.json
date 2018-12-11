@@ -1,0 +1,49 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "pers.yurwisher.tokenstarter.TokenConfig",
+      "name": "yq.token",
+      "type": "pers.yurwisher.tokenstarter.TokenConfig"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "pers.yurwisher.tokenstarter.TokenConfig",
+      "defaultValue": "user",
+      "name": "yq.token.audience",
+      "description": "token接收者",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "pers.yurwisher.tokenstarter.TokenConfig",
+      "name": "yq.token.custom-token-class-name",
+      "description": "客户自定义token",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "pers.yurwisher.tokenstarter.TokenConfig",
+      "name": "yq.token.expire-time",
+      "description": "token过期时间,默认一天",
+      "type": "java.lang.Long"
+    },
+    {
+      "sourceType": "pers.yurwisher.tokenstarter.TokenConfig",
+      "name": "yq.token.issuer",
+      "description": "token签发者",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "pers.yurwisher.tokenstarter.TokenConfig",
+      "name": "yq.token.secret",
+      "description": "token密钥",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "pers.yurwisher.tokenstarter.TokenConfig",
+      "name": "yq.token.signature-algorithm",
+      "description": "header签名算法,默认HS256",
+      "type": "io.jsonwebtoken.SignatureAlgorithm"
+    }
+  ]
+}
