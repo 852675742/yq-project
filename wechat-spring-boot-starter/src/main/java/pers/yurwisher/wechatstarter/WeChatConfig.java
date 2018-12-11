@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @description 微信公众号配置
  * @since V1.0.0
  */
-@ConfigurationProperties(prefix = "yq.weChat")
+@ConfigurationProperties(prefix = "yurwisher.wechat")
 public class WeChatConfig {
 
     /**公众号appId*/

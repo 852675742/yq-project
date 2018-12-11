@@ -13,6 +13,7 @@
         <module>wechat-spring-boot-starter</module>
         <module>token</module>
         <module>token-spring-boot-starter</module>
+        <module>grabber</module>
     </modules>
 
     <properties>
@@ -20,11 +21,14 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
+        <!--自定义jar-->
         <wechat.version>0.0.1</wechat.version>
         <wechat-starter.version>0.0.1</wechat-starter.version>
         <token.version>0.0.1</token.version>
         <token-starter.version>0.0.1</token-starter.version>
+        <grabber.version>0.0.1</grabber.version>
 
+        <!--第三方依赖-->
         <spring-boot.version>1.5.12.RELEASE</spring-boot.version>
         <fastjson.version>1.2.47</fastjson.version>
         <httpclient.version>4.5.3</httpclient.version>

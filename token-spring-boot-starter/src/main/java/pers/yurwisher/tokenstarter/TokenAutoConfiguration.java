@@ -18,7 +18,7 @@ import pers.yurwisher.token.TokenService;
  */
 @Configuration
 @EnableConfigurationProperties(value = TokenConfig.class)
-@ConditionalOnProperty(prefix = "yq.token", value = "enable", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "yurwisher.token", value = "enable", matchIfMissing = true)
 public class TokenAutoConfiguration {
 
     @Autowired

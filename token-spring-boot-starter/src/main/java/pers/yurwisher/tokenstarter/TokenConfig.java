@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since V1.0.0
  */
 @Data
-@ConfigurationProperties(prefix = "yq.token")
+@ConfigurationProperties(prefix = "yurwisher.token")
 public class TokenConfig {
 
     /**
