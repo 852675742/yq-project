@@ -35,7 +35,7 @@ public class TokenAutoConfiguration {
         TokenHelper tokenHelper =  new TokenHelper(tokenConfig.getSecret(),
                 tokenConfig.getExpireTime(),tokenConfig.getIssuer(),
                 tokenConfig.getSignatureAlgorithm(),tokenConfig.getAudience());
-        tokenHelper.setCustomTokenClassName(tokenConfig.getCustomTokenClassName());
+        tokenHelper.setCustomTokenClass(tokenConfig.getCustomTokenClass());
         return tokenHelper;
     }
 

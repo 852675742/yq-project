@@ -24,24 +24,8 @@ public class TokenService{
 
     private TokenHelper tokenHelper;
 
-    private Class<? extends Token> customTokenClass;
-
     public TokenService(TokenHelper tokenHelper){
         this.tokenHelper = tokenHelper;
-        init();
-    }
-
-    @SuppressWarnings("unchecked")
-    private void init(){
-       String className =  tokenHelper.getCustomTokenClassName();
-       if(className != null){
-           try {
-               customTokenClass = (Class<? extends Token>) Class.forName(className);
-           } catch (ClassNotFoundException e) {
-               log.info("class not found,please check your config");
-               throw new TokenException("user custom token subclass classpath error");
-           }
-       }
     }
 
     /**
@@ -65,7 +49,7 @@ public class TokenService{
             if(claimsJws != null){
                 Claims claims = claimsJws.getBody() ;
                 if(claims != null && !claims.isEmpty()){
-                    return ((JSONObject) JSON.toJSON(claims)).toJavaObject(customTokenClass);
+                    return ((JSONObject) JSON.toJSON(claims)).toJavaObject(tokenHelper.getCustomTokenClass());
                 }
             }
         }catch (Exception e) {

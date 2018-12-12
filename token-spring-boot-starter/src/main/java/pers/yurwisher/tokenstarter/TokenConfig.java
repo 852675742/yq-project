@@ -3,6 +3,7 @@ package pers.yurwisher.tokenstarter;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import pers.yurwisher.token.Token;
 
 /**
  * @author yq
@@ -37,5 +38,5 @@ public class TokenConfig {
     /**
      * 客户自定义token
      */
-    private String customTokenClassName;
+    private Class<? extends Token> customTokenClass;
 }

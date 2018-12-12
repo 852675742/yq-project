@@ -49,7 +49,7 @@ public class TokenHelper {
     /**
      * 自定义token类全路径名
      */
-    private String customTokenClassName;
+    private Class<? extends Token> customTokenClass;
 
     /**
      * 默认过期时间 一天
