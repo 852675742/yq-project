@@ -1,4 +1,4 @@
-package pers.yurwisher.token;
+package pers.yurwisher.token.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -6,8 +6,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import pers.yurwisher.token.ITokenService;
+import pers.yurwisher.token.Token;
+import pers.yurwisher.token.exception.TokenException;
+import pers.yurwisher.token.TokenHelper;
 
 import java.util.Date;
 import java.util.Map;
@@ -18,20 +20,19 @@ import java.util.Map;
  * @description tokenService
  * @since V1.0.0
  */
-public class TokenService{
-
-    private static final Logger log = LoggerFactory.getLogger(TokenService.class);
+public class TokenServiceImpl implements ITokenService {
 
     private TokenHelper tokenHelper;
 
-    public TokenService(TokenHelper tokenHelper){
+    public TokenServiceImpl(TokenHelper tokenHelper){
         this.tokenHelper = tokenHelper;
     }
 
     /**
      * 生成token
      */
-    public String generateToken(String subject,Token token) {
+    @Override
+    public String generateToken(String subject, Token token) {
         return generateToken(subject,token.toJSON(),tokenHelper.getExpireTime());
     }
 
@@ -39,6 +40,7 @@ public class TokenService{
      * 解析token获取参数对象
      * @param jwsToken token
      */
+    @Override
     public Token parseToken(String jwsToken) {
         try{
             Jws<Claims> claimsJws = Jwts.parser()

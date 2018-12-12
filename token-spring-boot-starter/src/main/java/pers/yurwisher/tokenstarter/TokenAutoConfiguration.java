@@ -7,8 +7,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import pers.yurwisher.token.ITokenService;
 import pers.yurwisher.token.TokenHelper;
-import pers.yurwisher.token.TokenService;
+import pers.yurwisher.token.impl.TokenServiceImpl;
 
 /**
  * @author yq
@@ -40,10 +41,10 @@ public class TokenAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnClass(value = TokenService.class)
-    @ConditionalOnMissingBean(TokenService.class)
-    public TokenService tokenService(TokenHelper tokenHelper){
-        return new TokenService(tokenHelper);
+    @ConditionalOnClass(value = TokenServiceImpl.class)
+    @ConditionalOnMissingBean(TokenServiceImpl.class)
+    public ITokenService tokenService(TokenHelper tokenHelper){
+        return new TokenServiceImpl(tokenHelper);
     }
 
 

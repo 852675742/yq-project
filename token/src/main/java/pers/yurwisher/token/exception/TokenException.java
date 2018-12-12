@@ -1,4 +1,4 @@
-package pers.yurwisher.token;
+package pers.yurwisher.token.exception;
 
 /**
  * @author yq
