@@ -19,6 +19,10 @@ public class WeChatConfig {
     private String serverToken;
     /**服务器配置 消息加解密密钥(EncodingAESKey)*/
     private String aesKey;
+    /**
+     * weChat 服务请求url
+     */
+    private String serverUrl = "/weChat";
 
     public String getAppId() {
         return appId;
@@ -50,5 +54,13 @@ public class WeChatConfig {
 
     public void setAesKey(String aesKey) {
         this.aesKey = aesKey;
+    }
+
+    public String getServerUrl() {
+        return serverUrl;
+    }
+
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
     }
 }
