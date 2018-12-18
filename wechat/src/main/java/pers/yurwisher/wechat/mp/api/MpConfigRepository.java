@@ -2,6 +2,7 @@ package pers.yurwisher.wechat.mp.api;
 
 
 import pers.yurwisher.wechat.common.base.WxAccessToken;
+import pers.yurwisher.wechat.core.BaseConfigRepository;
 
 /**
  * @author yq
@@ -9,13 +10,7 @@ import pers.yurwisher.wechat.common.base.WxAccessToken;
  * @description 微信配置存储
  * @since V1.0.0
  */
-public interface WxConfigRepository {
-
-    /**公众号对应appId 开发者ID*/
-    String getAppId();
-
-    /**开发者密码(AppSecret)*/
-    String getSecret();
+public interface MpConfigRepository extends BaseConfigRepository {
 
     /**服务器配置令牌 token*/
     String getToken();

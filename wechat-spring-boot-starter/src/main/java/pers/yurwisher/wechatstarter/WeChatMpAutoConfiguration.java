@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import pers.yurwisher.wechat.core.WeChatMpServlet;
 import pers.yurwisher.wechat.mp.api.MpService;
 import pers.yurwisher.wechat.mp.api.WxMessageRouter;
-import pers.yurwisher.wechat.mp.api.impl.DefaultWxConfigRepository;
+import pers.yurwisher.wechat.mp.api.impl.DefaultMpConfigRepository;
 import pers.yurwisher.wechat.mp.api.impl.MpServiceImpl;
 
 /**
@@ -24,15 +24,15 @@ import pers.yurwisher.wechat.mp.api.impl.MpServiceImpl;
  */
 @Configuration
 //启动配置文件，value用来指定我们要启用的配置类
-@EnableConfigurationProperties(value = WeChatConfig.class)
+@EnableConfigurationProperties(value = WeChatMpConfig.class)
 //表示只有我们的配置文件是否配置了以yq.weChat为前缀的资源项值，并且在该资源项值为enable，如果没有配置我们默认设置为enable
-@ConditionalOnProperty(prefix = "yurwisher.wechat", value = "enable", matchIfMissing = true)
-public class WeChatAutoConfiguration {
+@ConditionalOnProperty(prefix = "yurwisher.wechat.mp", value = "enable", matchIfMissing = true)
+public class WeChatMpAutoConfiguration {
 
-    private static final Logger logger = LoggerFactory.getLogger(WeChatAutoConfiguration.class);
+    private static final Logger logger = LoggerFactory.getLogger(WeChatMpAutoConfiguration.class);
 
     @Autowired
-    private WeChatConfig weChatConfig;
+    private WeChatMpConfig weChatConfig;
     @Autowired
     private WxMessageRouter wxMessageRouter;
 
@@ -41,7 +41,7 @@ public class WeChatAutoConfiguration {
     @ConditionalOnClass(value = MpService.class)
     @ConditionalOnMissingBean(MpService.class)
     public MpService mpService(){
-        DefaultWxConfigRepository repository = new DefaultWxConfigRepository();
+        DefaultMpConfigRepository repository = new DefaultMpConfigRepository();
         repository.setAppId(weChatConfig.getAppId());
         repository.setSecret(weChatConfig.getSecret());
         repository.setToken(weChatConfig.getServerToken());

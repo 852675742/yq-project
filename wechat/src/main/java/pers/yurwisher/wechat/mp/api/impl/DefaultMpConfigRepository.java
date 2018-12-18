@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pers.yurwisher.wechat.common.base.WxAccessToken;
 import pers.yurwisher.wechat.mp.api.MpService;
-import pers.yurwisher.wechat.mp.api.WxConfigRepository;
+import pers.yurwisher.wechat.mp.api.MpConfigRepository;
 
 
 /**
@@ -13,9 +13,9 @@ import pers.yurwisher.wechat.mp.api.WxConfigRepository;
  * @description 默认微信配置存储 内存
  * @since V1.0.0
  */
-public class DefaultWxConfigRepository implements WxConfigRepository {
+public class DefaultMpConfigRepository implements MpConfigRepository {
 
-    private static final Logger logger = LoggerFactory.getLogger(DefaultWxConfigRepository.class);
+    private static final Logger logger = LoggerFactory.getLogger(DefaultMpConfigRepository.class);
 
     private MpService mpService;
 

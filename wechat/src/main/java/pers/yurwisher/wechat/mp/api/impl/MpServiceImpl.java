@@ -17,7 +17,7 @@ import pers.yurwisher.wechat.mp.api.KefuService;
 import pers.yurwisher.wechat.mp.api.MpService;
 import pers.yurwisher.wechat.mp.api.TemplateService;
 import pers.yurwisher.wechat.mp.api.TokenService;
-import pers.yurwisher.wechat.mp.api.WxConfigRepository;
+import pers.yurwisher.wechat.mp.api.MpConfigRepository;
 import pers.yurwisher.wechat.mp.api.WxMenuService;
 
 import java.util.List;
@@ -36,17 +36,17 @@ public class MpServiceImpl implements MpService {
     private TemplateService templateService = new TemplateServiceImpl(this);
     private TokenService tokenService = new TokenServiceImpl(this);
     private HttpRequest httpRequest;
-    private WxConfigRepository wxConfigRepository;
+    private MpConfigRepository wxConfigRepository;
     private MsgCrypt msgCrypt ;
     private WxMenuService wxMenuService = new WxMenuServiceImpl(this);
     private KefuService kefuService = new KefuServiceImpl(this);
 
-    public MpServiceImpl(WxConfigRepository wxConfigRepository) {
+    public MpServiceImpl(MpConfigRepository wxConfigRepository) {
         this.wxConfigRepository = wxConfigRepository;
         this.httpRequest = HttpRequestApacheImpl.INSTANCE;
     }
 
-    public MpServiceImpl(HttpRequest httpRequest, WxConfigRepository wxConfigRepository) {
+    public MpServiceImpl(HttpRequest httpRequest, MpConfigRepository wxConfigRepository) {
         this.httpRequest = httpRequest;
         this.wxConfigRepository = wxConfigRepository;
     }
@@ -67,7 +67,7 @@ public class MpServiceImpl implements MpService {
     }
 
     @Override
-    public WxConfigRepository getWxConfigRepository() {
+    public MpConfigRepository getMpConfigRepository() {
         return wxConfigRepository;
     }
 

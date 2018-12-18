@@ -55,7 +55,7 @@ public class WeChatMpServlet extends HttpServlet {
         //字段提取成功
         if (Utils.isNotEmpty(signature) && Utils.isNotEmpty(nonce)) {
             //token ,timestamp,nonce 字典序排序拼接成字符串,并通过sha1加密得到字符串
-            String hashcode = SHA1.gen(mpService.getWxConfigRepository().getToken(), timestamp, nonce);
+            String hashcode = SHA1.gen(mpService.getMpConfigRepository().getToken(), timestamp, nonce);
             //确定该数据是不是来源于微信后台
             boolean isFromWx = hashcode.equals(signature);
             logger.info("数据是否来源于微信后台:{}", isFromWx);

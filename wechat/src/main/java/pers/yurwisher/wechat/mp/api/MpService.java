@@ -41,9 +41,9 @@ public interface MpService {
 
     /**
      * 微信配置仓库
-     * @return WxConfigRepository
+     * @return MpConfigRepository
      */
-    WxConfigRepository getWxConfigRepository();
+    MpConfigRepository getMpConfigRepository();
 
     /**
      * 验证及转化 接口返回json
