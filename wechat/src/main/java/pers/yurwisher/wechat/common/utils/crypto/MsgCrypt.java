@@ -17,6 +17,7 @@ import java.io.ByteArrayInputStream;
 import java.nio.charset.Charset;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Random;
@@ -34,7 +35,14 @@ public class MsgCrypt {
 	byte[] aesKey;
 	private String token;
 	private String appId;
-	private Cipher cipher;
+	/**
+	 * 加密
+	 */
+	private Cipher encryptCipher;
+	/**
+	 * 解密
+	 */
+	private Cipher decryptCipher;
 
 	/**
 	 * 构造函数
@@ -48,10 +56,15 @@ public class MsgCrypt {
 		aesKey = Base64.decodeBase64(encodingAesKey + "=");
 		// 设置解密模式为AES的CBC模式
 		try {
-			cipher = Cipher.getInstance("AES/CBC/NoPadding");
+			encryptCipher = Cipher.getInstance("AES/CBC/NoPadding");
 			SecretKeySpec keySpec = new SecretKeySpec(aesKey, "AES");
 			IvParameterSpec iv = new IvParameterSpec(Arrays.copyOfRange(aesKey, 0, 16));
-			cipher.init(Cipher.DECRYPT_MODE, keySpec, iv);
+			encryptCipher.init(Cipher.ENCRYPT_MODE, keySpec, iv);
+
+			decryptCipher = Cipher.getInstance("AES/CBC/NoPadding");
+			SecretKeySpec keySpec2 = new SecretKeySpec(aesKey, "AES");
+			IvParameterSpec iv2 = new IvParameterSpec(Arrays.copyOfRange(aesKey, 0, 16));
+			decryptCipher.init(Cipher.DECRYPT_MODE, keySpec2,iv2);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException | InvalidKeyException e) {
 			LOGGER.error("初始化加解密失败...",e);
 		}
@@ -124,7 +137,7 @@ public class MsgCrypt {
 
 		try {
 			// 加密
-			byte[] encrypted = cipher.doFinal(unencrypted);
+			byte[] encrypted = encryptCipher.doFinal(unencrypted);
 			// 使用BASE64对加密后的字符串进行编码
 			return base64.encodeToString(encrypted);
 		} catch (Exception e) {
@@ -146,7 +159,7 @@ public class MsgCrypt {
 			// 使用BASE64对密文进行解码
 			byte[] encrypted = Base64.decodeBase64(text);
 			// 解密
-			original = cipher.doFinal(encrypted);
+			original = decryptCipher.doFinal(encrypted);
 		} catch (BadPaddingException | IllegalBlockSizeException e) {
 			throw new AesException(AesException.DecryptAESError);
 		}

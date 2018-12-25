@@ -51,6 +51,10 @@ public class WeChatMpServlet extends HttpServlet {
         String nonce = request.getParameter("nonce");
         //随机字符串
         String echostr = request.getParameter("echostr");
+        //加密类型
+        String encryptType = request.getParameter("encrypt_type");
+
+        logger.info("signature:{},timestamp:{},nonce:{},echostr:{},encryptType:{}", signature, timestamp, nonce, echostr, encryptType);
 
         //字段提取成功
         if (Utils.isNotEmpty(signature) && Utils.isNotEmpty(nonce)) {
@@ -59,17 +63,12 @@ public class WeChatMpServlet extends HttpServlet {
             //确定该数据是不是来源于微信后台
             boolean isFromWx = hashcode.equals(signature);
             logger.info("数据是否来源于微信后台:{}", isFromWx);
-            if (isFromWx) {
-                //来源于微信 返回echostr给微信,供微信后台认证token
+            if (isFromWx && Utils.isNotEmpty(echostr)) {
+                //来源于微信 只是一个验证请求
                 response.getWriter().println(echostr);
                 return;
             }
         }
-
-        //加密类型
-        String encryptType = request.getParameter("encrypt_type");
-
-        logger.info("signature:{},timestamp:{},nonce:{},echostr:{},encryptType:{}", signature, timestamp, nonce, echostr, encryptType);
 
         //消息主体
         String postData = IOUtils.toString(request.getInputStream(), Charset.forName("UTF-8"));
@@ -86,13 +85,14 @@ public class WeChatMpServlet extends HttpServlet {
             //消息经过路由后,返回处理消息
             WxMessage wxMessage = wxMessageRouter.route(xmlMessage);
             if (wxMessage != null) {
-                response.getWriter().println(wxMessage.toXml());
+                response.getWriter().write(wxMessage.toXml());
                 return;
             }
         } else if ("AES".equalsIgnoreCase(encryptType)) {
             //加密类型,为aes
             //消息签名，用于验证消息体的正确性
             String msgSignature = request.getParameter("msg_signature");
+            logger.info("msg_signature:{}", msgSignature);
             //解密消息报文
             try {
                 //消息解密后结果
@@ -106,7 +106,7 @@ public class WeChatMpServlet extends HttpServlet {
                     //加密
                     String resultXml = mpService.getMsgCrypt().generateEncryptedXml(wxMessage.toXml());
                     logger.info("加密后的消息报文:{}", resultXml);
-                    response.getWriter().println(resultXml);
+                    response.getWriter().write(resultXml);
                     return;
                 }
             } catch (AesException e) {
